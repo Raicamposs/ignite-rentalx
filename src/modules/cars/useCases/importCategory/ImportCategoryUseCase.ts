@@ -1,6 +1,6 @@
 import csvParse from "csv-parse";
 import fs from "fs";
-
+import { inject, injectable } from "tsyringe";
 import { CategoriesRepository } from "../../repositories/CategoriesRepository";
 
 interface ImportCategory {
@@ -8,8 +8,9 @@ interface ImportCategory {
   description: string;
 }
 
+@injectable()
 export class ImportCategoryUseCase {
-  constructor(private categoriesRepository: CategoriesRepository) { }
+  constructor(@inject("CategoriesRepository") private categoriesRepository: CategoriesRepository) { }
 
   private loadCategories(pathFile: fs.PathLike): Promise<ImportCategory[]> {
     return new Promise((resolve, reject) => {
@@ -47,3 +48,4 @@ export class ImportCategoryUseCase {
     });
   }
 }
+

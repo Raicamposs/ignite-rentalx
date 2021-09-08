@@ -1,12 +1,13 @@
+import { inject, injectable } from "tsyringe";
 import { SpecificationsRepository } from "../../repositories/SpecificationsRepository";
-
 interface Request {
   name: string;
   description: string;
 }
 
+@injectable()
 export default class CreateSpecificationUseCase {
-  constructor(private specificationsRepository: SpecificationsRepository) { }
+  constructor(@inject("SpecificationsRepository") private specificationsRepository: SpecificationsRepository) { }
 
   async execute({ name, description }: Request): Promise<void> {
     const specificationAlreadyExists = await this.specificationsRepository.findByName(name);
