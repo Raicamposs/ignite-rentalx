@@ -1,13 +1,16 @@
-import { MemoryCategoriesRepository } from "../../repositories/implementations/MemoryCategoriesRepository";
+import { PostgresCategoriesRepository } from "../../repositories/implementations/postgres/PostgresCategoriesRepository";
 import { CreateCategoryController } from "./CreateCategoryController";
 import CreateCategoryUseCase from "./CreateCategoryUseCase";
 
-const categoriesRepository = MemoryCategoriesRepository.getInstance();
+export default () => {
+  const categoriesRepository = new PostgresCategoriesRepository();
 
-const createCategoryUseCase = new CreateCategoryUseCase(categoriesRepository);
+  const createCategoryUseCase = new CreateCategoryUseCase(categoriesRepository);
 
-const createCategoryController = new CreateCategoryController(
-  createCategoryUseCase
-);
+  const createCategoryController = new CreateCategoryController(
+    createCategoryUseCase
+  );
 
-export { createCategoryController };
+  return createCategoryController
+};
+

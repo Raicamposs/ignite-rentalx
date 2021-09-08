@@ -4,7 +4,7 @@ import { SpecificationsRepository } from "../../repositories/SpecificationsRepos
 export default class ListSpecificationsUseCase {
   constructor(private specificationsRepository: SpecificationsRepository) { }
 
-  execute(): Category[] {
+  async execute(): Promise<Category[]> {
     return this.specificationsRepository.list();
   }
 }

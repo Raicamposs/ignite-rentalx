@@ -8,13 +8,13 @@ interface Request {
 export default class CreateCategoryUseCase {
   constructor(private categoriesRepository: CategoriesRepository) { }
 
-  execute({ name, description }: Request): void {
-    const categoryAlreadyExists = this.categoriesRepository.findByName(name);
+  async execute({ name, description }: Request): Promise<void> {
+    const categoryAlreadyExists = await this.categoriesRepository.findByName(name);
 
     if (categoryAlreadyExists) {
       throw new Error("Category Already exists!");
     }
 
-    this.categoriesRepository.create({ name, description });
+    await this.categoriesRepository.create({ name, description });
   }
 }

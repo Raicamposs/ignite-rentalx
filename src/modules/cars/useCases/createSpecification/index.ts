@@ -1,15 +1,20 @@
-import { MemorySpecificationsRepository } from "../../repositories/implementations/MemorySpecificationsRepository";
+
+import { PostgresSpecificationsRepository } from "../../repositories/implementations/postgres/PostgresSpecificationsRepository";
 import { CreateSpecificationController } from "./CreateSpecificationController";
 import CreateSpecificationUseCase from "./CreateSpecificationUseCase";
 
-const categoriesRepository = MemorySpecificationsRepository.getInstance();
 
-const createSpecificationUseCase = new CreateSpecificationUseCase(
-  categoriesRepository
-);
+export default () => {
+  const categoriesRepository = new PostgresSpecificationsRepository();
 
-const createSpecificationController = new CreateSpecificationController(
-  createSpecificationUseCase
-);
+  const createSpecificationUseCase = new CreateSpecificationUseCase(
+    categoriesRepository
+  );
 
-export { createSpecificationController };
+  const createSpecificationController = new CreateSpecificationController(
+    createSpecificationUseCase
+  );
+
+  return createSpecificationController
+};
+
