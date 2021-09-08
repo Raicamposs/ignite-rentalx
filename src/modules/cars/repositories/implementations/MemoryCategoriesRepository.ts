@@ -1,4 +1,4 @@
-import { Category } from "../../model/category";
+import { Category } from "../../entities/category";
 import {
   CategoriesRepository,
   CreateCategoryDTO,
@@ -22,7 +22,9 @@ class MemoryCategoriesRepository implements CategoriesRepository {
   }
 
   public create({ name, description }: CreateCategoryDTO): void {
-    this.categories.push(new Category({ name, description }));
+    const category = new Category();
+    Object.assign(category, { name, description, created_at: new Date() });
+    this.categories.push(category);
   }
 
   public list(): Category[] {

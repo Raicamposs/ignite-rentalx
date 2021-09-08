@@ -1,4 +1,4 @@
-import { Specification } from "../../model/specification";
+import { Specification } from "../../entities/specification";
 import {
   CreateSpecificationDTO,
   SpecificationsRepository,
@@ -23,7 +23,9 @@ class MemorySpecificationsRepository implements SpecificationsRepository {
   }
 
   public create({ name, description }: CreateSpecificationDTO): void {
-    this.specifications.push(new Specification({ name, description }));
+    const specification = new Specification();
+    Object.assign(specification, { name, description, created_at: new Date() });
+    this.specifications.push(specification);
   }
 
   public list(): Specification[] {
