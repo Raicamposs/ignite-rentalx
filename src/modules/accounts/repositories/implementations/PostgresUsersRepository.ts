@@ -1,7 +1,6 @@
-import { Repository, getRepository } from "typeorm";
-import { Category } from "../../../cars/entities/category";
-import { CreateUSerDTO } from "../../dtos/UserCreateDTO";
-import { User } from "../../entities/User";
+import { CreateUSerDTO } from "@modules/accounts/dtos/UserCreateDTO";
+import { User } from "@modules/accounts/entities/User";
+import { getRepository, Repository } from "typeorm";
 import { UsersRepository } from "../UsersRepository";
 
 class PostgresUsersRepository implements UsersRepository {
@@ -35,4 +34,4 @@ class PostgresUsersRepository implements UsersRepository {
 
 }
 
-export { PostgresUsersRepository }
+export { PostgresUsersRepository };

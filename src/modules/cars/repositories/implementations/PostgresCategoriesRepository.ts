@@ -1,9 +1,10 @@
+
+import { Category } from "@modules/cars/entities/category";
 import { getRepository, Repository } from "typeorm";
-import { Category } from "../../../entities/category";
 import {
   CategoriesRepository,
-  CreateCategoryDTO,
-} from "../../CategoriesRepository";
+  CreateCategoryDTO
+} from "../CategoriesRepository";
 
 class PostgresCategoriesRepository implements CategoriesRepository {
   private repository: Repository<Category>;
@@ -29,3 +30,4 @@ class PostgresCategoriesRepository implements CategoriesRepository {
 }
 
 export { PostgresCategoriesRepository };
+

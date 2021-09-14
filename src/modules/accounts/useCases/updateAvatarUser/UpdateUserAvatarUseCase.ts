@@ -1,8 +1,8 @@
 
 
+import { UsersRepository } from "@modules/accounts/repositories/UsersRepository";
+import { deleteFile } from "@utils/file";
 import { inject, injectable } from "tsyringe";
-import { deleteFile } from "../../../../utils/file";
-import { UsersRepository } from "../../repositories/UsersRepository";
 
 interface Request {
   pathFile: string,

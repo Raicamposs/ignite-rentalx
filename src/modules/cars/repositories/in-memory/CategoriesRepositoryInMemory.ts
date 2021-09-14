@@ -1,23 +1,13 @@
-import { Category } from "../../../entities/category";
+import { Category } from "../../entities/category";
 import {
   CategoriesRepository,
   CreateCategoryDTO,
-} from "../../CategoriesRepository";
+} from "../CategoriesRepository";
 
-class MemoryCategoriesRepository implements CategoriesRepository {
+class CategoriesRepositoryInMemory implements CategoriesRepository {
   private categories: Category[];
 
-  private static INSTANCE: MemoryCategoriesRepository;
-
-  public static getInstance(): MemoryCategoriesRepository {
-    if (!MemoryCategoriesRepository.INSTANCE) {
-      MemoryCategoriesRepository.INSTANCE = new MemoryCategoriesRepository();
-    }
-
-    return MemoryCategoriesRepository.INSTANCE;
-  }
-
-  private constructor() {
+  constructor() {
     this.categories = [];
   }
 
@@ -43,4 +33,4 @@ class MemoryCategoriesRepository implements CategoriesRepository {
   }
 }
 
-export { MemoryCategoriesRepository };
+export { CategoriesRepositoryInMemory };

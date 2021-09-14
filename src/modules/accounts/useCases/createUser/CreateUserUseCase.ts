@@ -1,8 +1,10 @@
-import { inject, injectable } from "tsyringe";
-import { CreateUSerDTO } from "../../dtos/UserCreateDTO";
-import { UsersRepository } from "../../repositories/UsersRepository";
+import { AppError } from "@errors/AppErros";
+import { CreateUSerDTO } from "@modules/accounts/dtos/UserCreateDTO";
+import { UsersRepository } from "@modules/accounts/repositories/UsersRepository";
 import { hash } from "bcrypt";
-import { AppError } from "../../../../errors/AppErros";
+import { inject, injectable } from "tsyringe";
+
+
 
 
 

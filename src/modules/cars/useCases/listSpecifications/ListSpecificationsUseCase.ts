@@ -1,6 +1,7 @@
+import { Category } from "@modules/cars/entities/category";
+import { SpecificationsRepository } from "@modules/cars/repositories/SpecificationsRepository";
 import { inject, injectable } from "tsyringe";
-import { Category } from "../../entities/category";
-import { SpecificationsRepository } from "../../repositories/SpecificationsRepository";
+
 @injectable()
 export default class ListSpecificationsUseCase {
   constructor(@inject("SpecificationsRepository") private specificationsRepository: SpecificationsRepository) { }

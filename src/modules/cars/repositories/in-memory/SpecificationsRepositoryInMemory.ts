@@ -1,22 +1,11 @@
-import { Specification } from "../../../entities/specification";
-import { CreateSpecificationDTO, SpecificationsRepository } from "../../SpecificationsRepository";
+import { Specification } from "../../entities/specification";
+import { SpecificationsRepository, CreateSpecificationDTO } from "../SpecificationsRepository";
 
 
-class MemorySpecificationsRepository implements SpecificationsRepository {
+class SpecificationsRepositoryInMemory implements SpecificationsRepository {
   private specifications: Specification[];
 
-  private static INSTANCE: MemorySpecificationsRepository;
-
-  public static getInstance(): MemorySpecificationsRepository {
-    if (!MemorySpecificationsRepository.INSTANCE) {
-      MemorySpecificationsRepository.INSTANCE =
-        new MemorySpecificationsRepository();
-    }
-
-    return MemorySpecificationsRepository.INSTANCE;
-  }
-
-  private constructor() {
+  constructor() {
     this.specifications = [];
   }
 
@@ -44,5 +33,5 @@ class MemorySpecificationsRepository implements SpecificationsRepository {
   }
 }
 
-export { MemorySpecificationsRepository };
+export { SpecificationsRepositoryInMemory };
 

@@ -1,9 +1,9 @@
 
+import { AppError } from "@errors/AppErros";
+import { UsersRepository } from "@modules/accounts/repositories/UsersRepository";
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 import { inject, injectable } from "tsyringe";
-import { AppError } from "../../../../errors/AppErros";
-import { UsersRepository } from "../../repositories/UsersRepository";
 
 
 interface Request {

@@ -1,6 +1,7 @@
+import { AppError } from "@errors/AppErros";
+import { CategoriesRepository } from "@modules/cars/repositories/CategoriesRepository";
 import { inject, injectable } from "tsyringe";
-import { AppError } from "../../../../errors/AppErros";
-import { CategoriesRepository } from "../../repositories/CategoriesRepository";
+
 interface Request {
   name: string;
   description: string;
