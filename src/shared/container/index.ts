@@ -1,8 +1,10 @@
 import { PostgresUsersRepository } from "@modules/accounts/infra/typeorm/repositories/PostgresUsersRepository";
 import { UsersRepository } from "@modules/accounts/repositories/UsersRepository";
-import { CategoriesRepository } from "@modules/cars/repositories/CategoriesRepository";
+import { PostgresCarsRepository } from "@modules/cars/infra/typeorm/repositories/PostgresCarsRepository";
 import { PostgresCategoriesRepository } from "@modules/cars/infra/typeorm/repositories/PostgresCategoriesRepository";
 import { PostgresSpecificationsRepository } from "@modules/cars/infra/typeorm/repositories/PostgresSpecificationsRepository";
+import { CarsRepository } from "@modules/cars/repositories/CarRepository";
+import { CategoriesRepository } from "@modules/cars/repositories/CategoriesRepository";
 import { SpecificationsRepository } from "@modules/cars/repositories/SpecificationsRepository";
 import "reflect-metadata";
 import { container } from "tsyringe";
@@ -21,4 +23,9 @@ container.registerSingleton<SpecificationsRepository>(
 container.registerSingleton<UsersRepository>(
   "UsersRepository",
   PostgresUsersRepository
+);
+
+container.registerSingleton<CarsRepository>(
+  "CarsRepository",
+  PostgresCarsRepository
 );
