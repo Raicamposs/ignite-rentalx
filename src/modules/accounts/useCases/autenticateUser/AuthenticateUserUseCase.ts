@@ -1,5 +1,5 @@
 
-import { AppError } from "@errors/AppErros";
+import { AppError } from "@shared/errors/AppErros";
 import { UsersRepository } from "@modules/accounts/repositories/UsersRepository";
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";

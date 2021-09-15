@@ -1,10 +1,6 @@
 import { CreateUSerDTO } from "@modules/accounts/dtos/UserCreateDTO";
-import { User } from "@modules/accounts/entities/User";
+import { User } from "@modules/accounts/infra/typeorm/entities/User";
 import { UsersRepository } from "../UsersRepository";
-
-
-
-
 
 class UsersRepositoryInMemory implements UsersRepository {
   private users: User[];

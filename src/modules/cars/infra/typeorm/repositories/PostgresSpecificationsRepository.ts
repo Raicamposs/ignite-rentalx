@@ -1,6 +1,7 @@
-import { Specification } from "@modules/cars/entities/specification";
+
 import { getRepository, Repository } from "typeorm";
-import { CreateSpecificationDTO, SpecificationsRepository } from "../SpecificationsRepository";
+import { CreateSpecificationDTO, SpecificationsRepository } from "../../../repositories/SpecificationsRepository";
+import { Specification } from "../entities/specification";
 
 class PostgresSpecificationsRepository implements SpecificationsRepository {
   private repository: Repository<Specification>;

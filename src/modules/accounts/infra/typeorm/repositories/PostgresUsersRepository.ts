@@ -1,7 +1,7 @@
 import { CreateUSerDTO } from "@modules/accounts/dtos/UserCreateDTO";
-import { User } from "@modules/accounts/entities/User";
 import { getRepository, Repository } from "typeorm";
-import { UsersRepository } from "../UsersRepository";
+import { UsersRepository } from "../../../repositories/UsersRepository";
+import { User } from "../entities/User";
 
 class PostgresUsersRepository implements UsersRepository {
 

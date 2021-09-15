@@ -1,4 +1,4 @@
-import { AppError } from "@errors/AppErros";
+import { AppError } from "@shared/errors/AppErros";
 import { CreateUSerDTO } from "@modules/accounts/dtos/UserCreateDTO";
 import { UsersRepository } from "@modules/accounts/repositories/UsersRepository";
 import { hash } from "bcrypt";
