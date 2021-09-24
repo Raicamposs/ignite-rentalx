@@ -20,13 +20,13 @@ class PostgresUsersRepository implements UsersRepository {
     return user;
   }
 
-  async create({ id, name, email, driver_licence, password, avatar }: CreateUSerDTO): Promise<void> {
+  async create({ id, name, email, driver_license, password, avatar }: CreateUSerDTO): Promise<void> {
     const user = this.repository.create({
       id,
       avatar,
       name,
       email,
-      driver_licence,
+      driver_license,
       password,
     });
     await this.repository.save(user);

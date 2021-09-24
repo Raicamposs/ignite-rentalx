@@ -22,7 +22,7 @@ describe("Authenticate User", () => {
     const user: CreateUSerDTO = {
       name: 'User test',
       email: 'teste@email.com',
-      driver_licence: '99999999',
+      driver_license: '99999999',
       password: 'password',
     }
     await createUserUseCase.execute(user);
@@ -40,7 +40,7 @@ describe("Authenticate User", () => {
     const user: CreateUSerDTO = {
       name: 'User test',
       email: 'teste@email.com',
-      driver_licence: '99999999',
+      driver_license: '99999999',
       password: 'password',
     }
 

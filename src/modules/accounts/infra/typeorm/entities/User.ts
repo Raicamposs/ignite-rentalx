@@ -16,7 +16,7 @@ export class User {
   avatar: string;
 
   @Column()
-  driver_licence: string;
+  driver_license: string;
 
   @Column()
   password: string;

@@ -1,5 +1,4 @@
-import { Specification } from "../entities/specification";
-
+import { Specification } from "../infra/typeorm/entities/specification";
 interface CreateSpecificationDTO {
   name: string;
   description: string;
@@ -12,3 +11,4 @@ interface SpecificationsRepository {
 }
 
 export { SpecificationsRepository, CreateSpecificationDTO };
+

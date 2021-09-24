@@ -12,7 +12,7 @@ import { inject, injectable } from "tsyringe";
 export default class CreateUserUseCase {
   constructor(@inject("UsersRepository") private usersRepository: UsersRepository) { }
 
-  async execute({ name, email, driver_licence, password }: CreateUSerDTO): Promise<void> {
+  async execute({ name, email, driver_license, password }: CreateUSerDTO): Promise<void> {
 
     const userAlreadyExists = await this.usersRepository.findByEmail(email);
 
@@ -21,6 +21,6 @@ export default class CreateUserUseCase {
     }
 
     const passwordHash = await hash(password, 8);
-    await this.usersRepository.create({ name, email, driver_licence, password: passwordHash });
+    await this.usersRepository.create({ name, email, driver_license, password: passwordHash });
   }
 }

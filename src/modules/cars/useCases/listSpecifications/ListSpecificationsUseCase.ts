@@ -1,4 +1,5 @@
-import { Category } from "@modules/cars/entities/category";
+
+import { Category } from "@modules/cars/infra/typeorm/entities/category";
 import { SpecificationsRepository } from "@modules/cars/repositories/SpecificationsRepository";
 import { inject, injectable } from "tsyringe";
 

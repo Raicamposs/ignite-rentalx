@@ -2,14 +2,28 @@
 
 import { CreateCarDTO } from "@modules/cars/dtos/CreateCarDTO";
 import { Car } from "@modules/cars/infra/typeorm/entities/car";
-import { CarsRepository } from "../CarRepository";
 import { v4 as uuidV4 } from "uuid";
+import { CarsRepository } from "../CarRepository";
 
 class CarsRepositoryInMemory implements CarsRepository {
   private cars: Car[];
 
   constructor() {
     this.cars = [];
+  }
+
+
+  async findAvailable(query: { name?: string; brand?: string; categoryId?: string; }): Promise<Car[]> {
+
+    const { name, brand, categoryId } = query;
+
+    const carsAvailable = this.cars
+      .filter((car) => car.available === true)
+      .filter((car) => !categoryId || car.categoryId === categoryId)
+      .filter((car) => !brand || car.brand === brand)
+      .filter((car) => !name || car.name === name);
+
+    return carsAvailable;
   }
 
   findByLicensePlate(licensePlate: string): Promise<Car> {
