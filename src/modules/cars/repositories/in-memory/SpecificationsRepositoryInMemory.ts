@@ -1,6 +1,6 @@
 
 import { Specification } from "@modules/cars/infra/typeorm/entities/specification";
-import { SpecificationsRepository, CreateSpecificationDTO } from "../SpecificationsRepository";
+import { CreateSpecificationDTO, SpecificationsRepository } from "../SpecificationsRepository";
 
 
 class SpecificationsRepositoryInMemory implements SpecificationsRepository {
@@ -10,12 +10,18 @@ class SpecificationsRepositoryInMemory implements SpecificationsRepository {
     this.specifications = [];
   }
 
-  public create({ name, description }: CreateSpecificationDTO): Promise<void> {
+  findByIds(ids: string[]): Promise<Specification[]> {
+    return new Promise((resolve, _) => {
+      resolve(this.specifications.filter((specification) => ids.includes(specification.id)));
+    });
+  }
+
+  public create({ name, description }: CreateSpecificationDTO): Promise<Specification> {
     return new Promise((resolve, _) => {
       const specification = new Specification();
       Object.assign(specification, { name, description, created_at: new Date() });
       this.specifications.push(specification);
-      resolve();
+      resolve(specification);
     });
   }
 

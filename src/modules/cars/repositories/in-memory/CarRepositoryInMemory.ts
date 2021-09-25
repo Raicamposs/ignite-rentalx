@@ -12,6 +12,12 @@ class CarsRepositoryInMemory implements CarsRepository {
     this.cars = [];
   }
 
+  findById(id: string): Promise<Car> {
+    return new Promise((resolve, _) => {
+      resolve(this.cars.find((car) => car.id === id));
+    });
+  }
+
 
   async findAvailable(query: { name?: string; brand?: string; categoryId?: string; }): Promise<Car[]> {
 
@@ -28,14 +34,14 @@ class CarsRepositoryInMemory implements CarsRepository {
 
   findByLicensePlate(licensePlate: string): Promise<Car> {
     return new Promise((resolve, _) => {
-      resolve(this.cars.find((category) => category.licensePlate === licensePlate));
+      resolve(this.cars.find((car) => car.licensePlate === licensePlate));
     });
   }
 
-  create({ name, description, licensePlate, dailyRate, fineAmount, brand, categoryId }: CreateCarDTO): Promise<Car> {
+  create({ name, description, licensePlate, dailyRate, fineAmount, brand, categoryId, specifications }: CreateCarDTO): Promise<Car> {
     return new Promise((resolve, _) => {
       const car = new Car();
-      Object.assign(car, { name, description, licensePlate, dailyRate, fineAmount, brand, categoryId });
+      Object.assign(car, { name, description, licensePlate, dailyRate, fineAmount, brand, categoryId, specifications });
 
       car.available = true;
       car.createdAt = new Date();

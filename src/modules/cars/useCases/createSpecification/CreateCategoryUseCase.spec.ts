@@ -1,11 +1,9 @@
-import { AppError } from "@shared/errors/AppErros";
-import { CategoriesRepository } from "@modules/cars/repositories/CategoriesRepository";
 import { SpecificationsRepositoryInMemory } from "@modules/cars/repositories/in-memory/SpecificationsRepositoryInMemory";
+import { SpecificationsRepository } from "@modules/cars/repositories/SpecificationsRepository";
+import { AppError } from "@shared/errors/AppErros";
 import CreateSpecificationUseCase from "./CreateSpecificationUseCase";
 
-
-
-let repository: CategoriesRepository;
+let repository: SpecificationsRepository;
 let createSpecificationUseCase: CreateSpecificationUseCase;
 
 describe("Create specification", () => {

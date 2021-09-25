@@ -10,9 +10,13 @@ class PostgresSpecificationsRepository implements SpecificationsRepository {
     this.repository = getRepository(Specification);
   }
 
-  public async create({ name, description }: CreateSpecificationDTO): Promise<void> {
+  findByIds(ids: string[]): Promise<Specification[]> {
+    return this.repository.findByIds(ids);
+  }
+
+  public async create({ name, description }: CreateSpecificationDTO): Promise<Specification> {
     const specification = this.repository.create({ name, description });
-    await this.repository.save(specification);
+    return this.repository.save(specification);
   }
 
   public async list(): Promise<Specification[]> {

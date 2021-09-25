@@ -12,6 +12,10 @@ class PostgresCarsRepository implements CarsRepository {
     this.repository = getRepository(Car);
   }
 
+  findById(id: string): Promise<Car> {
+    return this.repository.findOne({ id });
+  }
+
   findAvailable(query: { name?: string; brand?: string; categoryId?: string; }): Promise<Car[]> {
     const carQuery = this.repository.createQueryBuilder('c')
       .where("available = :available", { available: true });
@@ -31,8 +35,8 @@ class PostgresCarsRepository implements CarsRepository {
     return carQuery.getMany();
   }
 
-  create({ name, description, licensePlate, dailyRate, fineAmount, brand, categoryId }: CreateCarDTO): Promise<Car> {
-    const car = this.repository.create({ name, description, licensePlate, dailyRate, fineAmount, brand, categoryId });
+  create({ id, name, description, licensePlate, dailyRate, fineAmount, brand, categoryId, specifications }: CreateCarDTO): Promise<Car> {
+    const car = this.repository.create({ id, name, description, licensePlate, dailyRate, fineAmount, brand, categoryId, specifications });
     return this.repository.save(car);
   }
 
