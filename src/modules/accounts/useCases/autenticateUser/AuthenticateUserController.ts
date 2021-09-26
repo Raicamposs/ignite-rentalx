@@ -6,15 +6,19 @@ import AuthenticateUserUseCase from "./AuthenticateUserUseCase";
 class AuthenticateUserController {
   constructor() { }
 
-  async handle(request: Request, response: Response): Promise<Response> {
+  async handle(request: Request, response: Response, next): Promise<Response> {
     const { email, password } = request.body;
 
     const useCase = container.resolve(AuthenticateUserUseCase);
-    const token = await useCase.execute({
-      email, password
-    });
+    try {
+      const token = await useCase.execute({
+        email, password
+      });
 
-    return response.send(token);
+      return response.send(token);
+    } catch (e) {
+      next(e)
+    }
   }
 }
 

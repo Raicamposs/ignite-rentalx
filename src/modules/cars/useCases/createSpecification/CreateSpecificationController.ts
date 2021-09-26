@@ -5,15 +5,20 @@ import CreateSpecificationUseCase from "./CreateSpecificationUseCase";
 export class CreateSpecificationController {
   constructor() { }
 
-  async handle(request: Request, response: Response): Promise<Response> {
+  async handle(request: Request, response: Response, next): Promise<Response> {
     const { name, description } = request.body;
 
     const createSpecificationUseCase = container.resolve(CreateSpecificationUseCase);
-    await createSpecificationUseCase.execute({
-      name,
-      description,
-    });
+    try {
+      await createSpecificationUseCase.execute({
+        name,
+        description,
+      });
 
-    return response.status(201).send();
+      return response.status(201).send();
+
+    } catch (e) {
+      next(e)
+    }
   }
 }

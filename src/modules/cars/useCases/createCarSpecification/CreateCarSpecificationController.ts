@@ -6,13 +6,17 @@ import { CreateSpecificationCarUseCase } from "./CreateCarSpecificationUseCase";
 export class CreateSpecificationCarController {
   constructor() { }
 
-  async handle(request: Request, response: Response): Promise<Response> {
+  async handle(request: Request, response: Response, next): Promise<Response> {
     const { id } = request.params;
     const { specificationsId } = request.body;
 
     const createCarUseCase = container.resolve(CreateSpecificationCarUseCase);
-    const car = await createCarUseCase.execute({ carId: id, specificationsId });
+    try {
+      const car = await createCarUseCase.execute({ carId: id, specificationsId });
 
-    return response.json(car);
+      return response.json(car);
+    } catch (e) {
+      next(e)
+    }
   }
 }

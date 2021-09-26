@@ -6,12 +6,17 @@ import { UploadCarImagesUseCase } from "./UploadCarImagesUseCase";
 export class UploadCarImagesController {
   constructor() { }
 
-  async handle(request: Request, response: Response): Promise<Response> {
+  async handle(request: Request, response: Response, next): Promise<Response> {
     const { id: carId } = request.params;
     const { files } = request;
 
     const uploadCarImagesUseCase = container.resolve(UploadCarImagesUseCase);
-    await uploadCarImagesUseCase.execute({ carId, imagesName: (files as Express.Multer.File[]).map(file => file.filename) });
-    return response.status(201).send();
+
+    try {
+      await uploadCarImagesUseCase.execute({ carId, imagesName: (files as Express.Multer.File[]).map(file => file.filename) });
+      return response.status(201).send();
+    } catch (e) {
+      next(e)
+    }
   }
 }

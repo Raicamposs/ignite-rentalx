@@ -6,7 +6,7 @@ import { CreateCarUseCase } from "./CreateCarUseCase";
 export class CreateCarController {
   constructor() { }
 
-  async handle(request: Request, response: Response): Promise<Response> {
+  async handle(request: Request, response: Response, next): Promise<Response> {
     const {
       name,
       description,
@@ -18,16 +18,23 @@ export class CreateCarController {
     } = request.body;
 
     const createCarUseCase = container.resolve(CreateCarUseCase);
-    const car = await createCarUseCase.execute({
-      name,
-      description,
-      licensePlate,
-      dailyRate,
-      fineAmount,
-      brand,
-      categoryId
-    });
+    try {
+      const car = await createCarUseCase.execute({
+        name,
+        description,
+        licensePlate,
+        dailyRate,
+        fineAmount,
+        brand,
+        categoryId
+      });
 
-    return response.status(201).send(car);
+      return response.status(201).send(car);
+
+    } catch (e) {
+      next(e)
+    }
   }
+
+
 }
