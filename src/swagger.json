@@ -20,6 +20,9 @@
     },
     {
       "name": "specifications"
+    },
+    {
+      "name": "auth"
     }
   ],
   "paths": {
@@ -60,7 +63,7 @@
               },
               "example": {
                 "name": "category name sample",
-                "description": "category description sample"
+                "desccription": "category desccription sample"
               }
             }
           }
@@ -72,7 +75,12 @@
           "500": {
             "description": "Category already exists"
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
     "/specifications": {
@@ -112,7 +120,7 @@
               },
               "example": {
                 "name": "specification name sample",
-                "description": "specification description sample"
+                "desccription": "specification desccription sample"
               }
             }
           }
@@ -123,6 +131,41 @@
           },
           "500": {
             "description": "Specification already exists"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/sessions": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Authentication user",
+        "description": "Create a session for a user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/sessions_body"
+              },
+              "example": {
+                "email": "admin@rentx.com.br",
+                "password": "admin"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "Email or password incorrect!"
           }
         }
       }
@@ -146,7 +189,7 @@
             "type": "string",
             "example": "SUV"
           },
-          "description": {
+          "desccription": {
             "type": "string",
             "example": "Sedan"
           },
@@ -172,7 +215,7 @@
             "type": "string",
             "example": "SUV"
           },
-          "description": {
+          "desccription": {
             "type": "string",
             "example": "Sedan"
           },
@@ -188,7 +231,7 @@
           "name": {
             "type": "string"
           },
-          "description": {
+          "desccription": {
             "type": "string"
           }
         }
@@ -199,10 +242,29 @@
           "name": {
             "type": "string"
           },
-          "description": {
+          "desccription": {
             "type": "string"
           }
         }
+      },
+      "sessions_body": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   }
