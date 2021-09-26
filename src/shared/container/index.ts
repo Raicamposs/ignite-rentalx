@@ -8,8 +8,11 @@ import { CarImageRepository } from "@modules/cars/repositories/CarImageRepositor
 import { CarsRepository } from "@modules/cars/repositories/CarRepository";
 import { CategoriesRepository } from "@modules/cars/repositories/CategoriesRepository";
 import { SpecificationsRepository } from "@modules/cars/repositories/SpecificationsRepository";
+import { PostgresRentalsRepository } from "@modules/rentals/infra/typeorm/repositories/PostgresRentalsRepository";
+import { RentalsRepository } from "@modules/rentals/repositories/RentalsRepository";
 import "reflect-metadata";
 import { container } from "tsyringe";
+import "./providers";
 
 
 container.registerSingleton<CategoriesRepository>(
@@ -31,7 +34,14 @@ container.registerSingleton<CarsRepository>(
   "CarsRepository",
   PostgresCarsRepository
 );
+
 container.registerSingleton<CarImageRepository>(
   "CarImageRepository",
   PostgresCarImageRepository
 );
+
+container.registerSingleton<RentalsRepository>(
+  "RentalsRepository",
+  PostgresRentalsRepository
+);
+
