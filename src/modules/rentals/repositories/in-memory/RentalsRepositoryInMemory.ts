@@ -11,6 +11,7 @@ class RentalsRepositoryInMemory implements RentalsRepository {
   }
 
 
+
   async create({ userId, carId, expectedReturnDate, id, endDate, total }: CreateRentalDTO): Promise<Rental> {
     const rental = new Rental();
 
@@ -41,6 +42,11 @@ class RentalsRepositoryInMemory implements RentalsRepository {
   async findOpenRentalByUser(userId: string): Promise<Rental> {
     return this.rentals.find((rental) => rental.userId === userId && !rental.endDate);
   }
+
+  async findByUserId(userId: string): Promise<Rental[]> {
+    return this.rentals.filter((rental) => rental.userId === userId);
+  }
+
 }
 
 export { RentalsRepositoryInMemory };

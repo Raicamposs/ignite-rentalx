@@ -15,6 +15,15 @@ export class PostgresRentalsRepository implements RentalsRepository {
     return this.repository.findOne({ id });
   }
 
+  findByUserId(userId: string): Promise<Rental[]> {
+    return this.repository.find({
+      where: { userId },
+      relations: [
+        "car"
+      ]
+    });
+  }
+
   findOpenRentalByCar(carId: string): Promise<Rental> {
     return this.repository.findOne({ carId, endDate: IsNull() });
   }

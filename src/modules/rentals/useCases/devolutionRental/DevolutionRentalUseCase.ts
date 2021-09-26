@@ -4,7 +4,7 @@ import { RentalsRepository } from "@modules/rentals/repositories/RentalsReposito
 import { DateProvider } from "@shared/container/providers/DateProvider/DateProvider";
 import { AppError } from "@shared/errors/AppErros";
 import { inject, injectable } from "tsyringe";
-import { Rental } from './../../infra/typeorm/entities/Rental';
+import { Rental } from '../../infra/typeorm/entities/Rental';
 
 
 interface Request {

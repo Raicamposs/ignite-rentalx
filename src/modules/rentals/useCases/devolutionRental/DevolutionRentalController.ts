@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-import { DevolutionRentalUseCase } from "./DevolutionREntalUseCase";
+import { DevolutionRentalUseCase } from "./DevolutionRentalUseCase";
 
 export class DevolutionRentalController {
 
