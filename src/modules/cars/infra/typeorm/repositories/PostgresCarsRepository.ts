@@ -12,6 +12,7 @@ class PostgresCarsRepository implements CarsRepository {
     this.repository = getRepository(Car);
   }
 
+
   findById(id: string): Promise<Car> {
     return this.repository.findOne({ id });
   }
@@ -42,6 +43,15 @@ class PostgresCarsRepository implements CarsRepository {
 
   findByLicensePlate(licensePlate: string): Promise<Car> {
     return this.repository.findOne({ licensePlate });
+  }
+
+  async updateAvailable(id: string, available: boolean): Promise<void> {
+    await this.repository.createQueryBuilder()
+      .update()
+      .set({ available })
+      .where("id = :id")
+      .setParameter("id", id)
+      .execute();
   }
 }
 

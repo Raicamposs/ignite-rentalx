@@ -1,3 +1,4 @@
+import { CarsRepository } from "@modules/cars/repositories/CarRepository";
 import { RentalsRepository } from "@modules/rentals/repositories/RentalsRepository";
 import { DateProvider } from "@shared/container/providers/DateProvider/DateProvider";
 import { AppError } from "@shared/errors/AppErros";
@@ -16,6 +17,7 @@ class CreateRentalUseCase {
   constructor(
     @inject("RentalsRepository") private rentalsRepository: RentalsRepository,
     @inject("DateProvider") private dateProvider: DateProvider,
+    @inject("CarsRepository") private carsRepository: CarsRepository
   ) { }
 
   async execute({ userId, carId, expectedReturnDate }: Request): Promise<Rental> {
@@ -38,7 +40,11 @@ class CreateRentalUseCase {
       throw new AppError("Rental must have a minimum duration of 24 hours!");
     }
 
-    return this.rentalsRepository.create({ userId, carId, expectedReturnDate });
+    const rental = await this.rentalsRepository.create({ userId, carId, expectedReturnDate });
+
+    await this.carsRepository.updateAvailable(carId, false);
+
+    return rental;
   }
 }
 

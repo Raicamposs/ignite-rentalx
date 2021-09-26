@@ -12,6 +12,11 @@ class CarsRepositoryInMemory implements CarsRepository {
     this.cars = [];
   }
 
+  async updateAvailable(id: string, available: boolean): Promise<void> {
+    const index = this.cars.findIndex((car) => car.id === id);
+    this.cars[index].available = available;
+  }
+
   findById(id: string): Promise<Car> {
     return new Promise((resolve, _) => {
       resolve(this.cars.find((car) => car.id === id));

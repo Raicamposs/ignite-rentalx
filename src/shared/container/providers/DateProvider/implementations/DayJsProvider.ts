@@ -8,6 +8,7 @@ dayjs.extend(utc);
 
 export class DayJsProvider implements DateProvider {
 
+
   convertToUTC(date: Date): string {
     return dayjs(date).utc().local().format();
   }
@@ -18,4 +19,9 @@ export class DayJsProvider implements DateProvider {
     return dayjs(endDateUTC).diff(startDateUTC, "hours");
   }
 
+  compareInDays(startDate: Date, endDate: Date): number {
+    const startDateUTC = this.convertToUTC(startDate);
+    const endDateUTC = this.convertToUTC(endDate);
+    return dayjs(endDateUTC).diff(startDateUTC, "days");
+  }
 }

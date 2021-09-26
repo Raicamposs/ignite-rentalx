@@ -10,10 +10,14 @@ class RentalsRepositoryInMemory implements RentalsRepository {
     this.rentals = [];
   }
 
-  async create({ userId, carId, expectedReturnDate }: CreateRentalDTO): Promise<Rental> {
+
+  async create({ userId, carId, expectedReturnDate, id, endDate, total }: CreateRentalDTO): Promise<Rental> {
     const rental = new Rental();
 
     Object.assign(rental, {
+      id,
+      total,
+      endDate,
       userId,
       carId,
       expectedReturnDate,
@@ -24,6 +28,10 @@ class RentalsRepositoryInMemory implements RentalsRepository {
 
     this.rentals.push(rental);
     return rental;
+  }
+
+  async findById(id: string): Promise<Rental> {
+    return this.rentals.find((rental) => rental.id === id);
   }
 
   async findOpenRentalByCar(carId: string): Promise<Rental> {
