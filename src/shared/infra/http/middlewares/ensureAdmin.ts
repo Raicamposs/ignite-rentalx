@@ -8,23 +8,26 @@ import { AppError } from "../../../errors/AppErros";
 
 
 export async function ensureAdmin(request: Request, _: Response, next: NextFunction): Promise<void> {
-  let { id } = request.user ?? {};
+  try {
+    let { id } = request.user ?? {};
 
-  if (!id) {
-    throw new AppError("Token missing", 401);
+    if (!id) {
+      throw new AppError("Token missing", 401);
+    }
+
+    const usersRepository = container.resolve<UsersRepository>("UsersRepository");
+    const user: User = await usersRepository.findById(id);
+
+    if (!user) {
+      throw new AppError("User does not exist!", 401);
+    }
+
+    if (!(user?.admin ?? false)) {
+      throw new AppError("User is not admin!", 401);
+    }
+
+    return next();
+  } catch (error) {
+    return next(error);
   }
-
-  const usersRepository = container.resolve<UsersRepository>("UsersRepository");
-  const user: User = await usersRepository.findById(id);
-
-  if (!user) {
-    throw new AppError("User does not exist!", 401);
-  }
-
-  if (!(user?.admin ?? false)) {
-    throw new AppError("User is not admin!", 401);
-  }
-
-  return next();
-
 }

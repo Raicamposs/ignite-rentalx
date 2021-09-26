@@ -1,5 +1,7 @@
 import { PostgresUsersRepository } from "@modules/accounts/infra/typeorm/repositories/PostgresUsersRepository";
+import { PostgresUsersTokensRepository } from "@modules/accounts/infra/typeorm/repositories/PostgresUsersTokensRepository";
 import { UsersRepository } from "@modules/accounts/repositories/UsersRepository";
+import { UsersTokensRepository } from "@modules/accounts/repositories/UsersTokensRepository";
 import { PostgresCarImageRepository } from "@modules/cars/infra/typeorm/repositories/PostgresCarImageRepository";
 import { PostgresCarsRepository } from "@modules/cars/infra/typeorm/repositories/PostgresCarsRepository";
 import { PostgresCategoriesRepository } from "@modules/cars/infra/typeorm/repositories/PostgresCategoriesRepository";
@@ -43,5 +45,10 @@ container.registerSingleton<CarImageRepository>(
 container.registerSingleton<RentalsRepository>(
   "RentalsRepository",
   PostgresRentalsRepository
+);
+
+container.registerSingleton<UsersTokensRepository>(
+  "UsersTokensRepository",
+  PostgresUsersTokensRepository
 );
 
