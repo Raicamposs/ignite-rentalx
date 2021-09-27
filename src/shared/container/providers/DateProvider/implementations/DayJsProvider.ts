@@ -9,6 +9,7 @@ dayjs.extend(utc);
 export class DayJsProvider implements DateProvider {
 
 
+
   convertToUTC(date: Date): string {
     return dayjs(date).utc().local().format();
   }
@@ -27,6 +28,14 @@ export class DayJsProvider implements DateProvider {
 
   addDays(days: number): Date {
     return dayjs().add(days, "days").toDate();
+  }
+
+  addHours(hours: number): Date {
+    return dayjs().add(hours, "hour").toDate();
+  }
+
+  compareIfBefore(startDate: Date, endDate: Date): boolean {
+    return dayjs(startDate).isBefore(endDate);
   }
 
 }

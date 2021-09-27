@@ -35,7 +35,7 @@ describe("Create Category Controller", () => {
       "password": "admin"
     });
 
-    token = body.token;
+    token = body.refreshToken;
   })
 
   it("Should be able to create a new category", async () => {

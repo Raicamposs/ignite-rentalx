@@ -35,7 +35,7 @@ describe("List Categories Controller", () => {
       "password": "admin"
     });
 
-    token = body.token;
+    token = body.refreshToken;
   })
 
   it("Should be able to list all categories", async () => {
